@@ -30,7 +30,7 @@ class App extends Component {
       <div className="app">
         <Navigation title={this.state.title} user={this.state.user} />
         <div className="main">
-          <PostComposer />
+          <PostComposer user={this.state.user} />
           <PostList />
         </div>
       </div>

@@ -19,7 +19,16 @@ class PostComposer extends Component {
 
   submit(e) {
     e.preventDefault();
-    console.log(this.state.postContent);
+
+    fire.database().ref('posts').push({
+      content: this.state.postContent,
+      createdAt: Date.now(),
+      createdBy: this.props.user.uid
+    }).then((ref) => {
+      console.log(ref.toString());
+    }).catch((e) => {
+      console.warn(e);
+    });
   };
 
   render() {
@@ -33,7 +42,8 @@ class PostComposer extends Component {
                 className="input"
                 value={this.state.postContent}
                 onChange={this.handleChange}
-                placeholder="Type your message..."></textarea>
+                placeholder="Type your message..."
+                required></textarea>
             </div>
 
             <div className="form-group">
