@@ -4,7 +4,10 @@ import fire from '../fire';
 import './post-composer.less';
 
 class PostComposer extends Component {
-  state = { postContent: "" };
+  state = {
+    postContent: "",
+    submitting: false
+  };
 
   constructor(props) {
     super(props);
@@ -20,16 +23,25 @@ class PostComposer extends Component {
   submit(e) {
     e.preventDefault();
 
+    this.setState({ submitting: true });
+
     fire.database().ref('posts').push({
       content: this.state.postContent,
       createdAt: Date.now(),
       createdBy: this.props.user.uid
     }).then((ref) => {
-      console.log(ref.toString());
+      this.setState({ postContent: "" });
     }).catch((e) => {
       console.warn(e);
+    }).then(() => {
+      this.setState({ submitting: false });
     });
   };
+
+  get classForButton() {
+    let defaultClasses = "btn btn-spinner red";
+    return this.state.submitting ? `${defaultClasses} loading` : defaultClasses;
+  }
 
   render() {
     return(
@@ -47,7 +59,8 @@ class PostComposer extends Component {
             </div>
 
             <div className="form-group">
-              <button attributeType="submit" className="btn red">Submit</button>
+              <button attributeType="submit"
+                className={this.classForButton}>Submit</button>
             </div>
           </form>
         </div>
