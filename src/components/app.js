@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import './app.less';
-import fbApp from '../firebase';
+import fire from '../fire';
 
 import Navigation from './navigation';
 import PostList from './post-list';
 import PostComposer from './post-composer';
 
+import './app.less';
+
 class App extends Component {
-  db = fbApp.database();
+  db = fire.database();
   state = {
     title: "React Playground",
     user: undefined
@@ -16,7 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    let auth = fbApp.auth();
+    let auth = fire.auth();
 
     auth.onAuthStateChanged((user) => {
       if(user) { this.setState({user: user}); }
