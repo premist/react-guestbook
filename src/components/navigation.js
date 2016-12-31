@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './navigation.less';
 
 class Navigation extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let greeting = null;
     if(this.props.user === undefined) {

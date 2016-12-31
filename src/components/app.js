@@ -4,6 +4,7 @@ import fbApp from '../firebase';
 
 import Navigation from './navigation';
 import PostList from './post-list';
+import PostComposer from './post-composer';
 
 class App extends Component {
   db = fbApp.database();
@@ -24,17 +25,13 @@ class App extends Component {
   }
 
   render() {
-    let loggedInStateMessage = null;
-    if(this.state.user === undefined) {
-      loggedInStateMessage = <span>You are not logged in!!</span>;
-    } else {
-      loggedInStateMessage = <span>You are logged in!!</span>;
-    }
-
     return (
-      <div className="App">
+      <div className="app">
         <Navigation title={this.state.title} user={this.state.user} />
-        <PostList />
+        <div className="main">
+          <PostComposer />
+          <PostList />
+        </div>
       </div>
     );
   }

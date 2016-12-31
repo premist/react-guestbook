@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './post-list.less';
 
 class PostList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <section className="post-list">
