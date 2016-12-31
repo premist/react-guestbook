@@ -1,6 +1,6 @@
 import firebase from "firebase";
-import config from './config';
+import firebaseConfig from './firebase-config';
 
-const fbApp = firebase.initializeApp(config);
+const fbApp = firebase.initializeApp(firebaseConfig);
 
 export default fbApp;
