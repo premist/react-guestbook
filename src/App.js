@@ -17,8 +17,8 @@ class App extends Component {
     let auth = fbApp.auth();
 
     auth.onAuthStateChanged((user) => {
-      if(user) { this.setState({user: user}); console.log(user); }
-      else { this.setState({user: undefined});  }
+      if(user) { this.setState({user: user}); }
+      else { this.setState({user: undefined}); }
     });
   }
 
