@@ -6,7 +6,10 @@ import Navigation from './components/navigation';
 
 class App extends Component {
   db = fbApp.database();
-  state = { user: undefined };
+  state = {
+    title: "React Playground",
+    user: undefined
+  };
 
   constructor(props) {
     super(props);
@@ -29,7 +32,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Navigation user={this.state.user} />
+        <Navigation title={this.state.title} user={this.state.user} />
         <div className="App-header container">
           <h2>Welcome to React!!!!</h2>
         </div>

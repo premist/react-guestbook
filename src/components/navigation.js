@@ -15,10 +15,19 @@ class Navigation extends Component {
     }
 
     return (
-      <div className="navigation">
-        <p>Hi I am a navigation</p>
-        <p className="greeting">{ greeting }</p>
-      </div>
+      <header className="navigation">
+        <div className="container">
+          <div className="row">
+            <div className="col-5 colspan-4">
+              <a className="title" href="#">{ this.props.title }</a>
+            </div>
+
+            <div className="col-5">
+              <p className="greeting">{ greeting }</p>
+            </div>
+          </div>
+        </div>
+      </header>
     );
   }
 }
