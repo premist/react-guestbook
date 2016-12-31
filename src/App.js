@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.less';
 import fbApp from './firebase';
 
+import Navigation from './components/navigation';
+
 class App extends Component {
   db = fbApp.database();
   state = { user: undefined };
@@ -27,6 +29,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Navigation user={this.state.user} />
         <div className="App-header container">
           <h2>Welcome to React!!!!</h2>
         </div>
