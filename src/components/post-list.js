@@ -15,6 +15,11 @@ class PostList extends Component {
   }
 
   componentDidMount() {
+    this.loadInitialPosts();
+    this.listenForPosts();
+  }
+
+  loadInitialPosts() {
     this.postsRef
       .orderByChild('createdAt')
       .limitToLast(25)
@@ -28,6 +33,14 @@ class PostList extends Component {
 
         this.setState({ posts: posts });
       });
+  }
+
+  listenForPosts() {
+    this.postsRef.on('child_added', (child) => {
+      this.setState({
+        posts: [[child.key, child.val()], ...this.state.posts]
+      });
+    });
   }
 
   render() {
