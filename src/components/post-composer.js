@@ -43,6 +43,10 @@ class PostComposer extends Component {
     return this.state.submitting ? `${defaultClasses} loading` : defaultClasses;
   }
 
+  get isDisabled() {
+    return this.state.submitting || this.props.user === undefined
+  }
+
   render() {
     return(
       <section className="post-composer">
@@ -52,6 +56,7 @@ class PostComposer extends Component {
               <label className="form-label" htmlFor="postContent">Your post</label>
               <textarea id="postContent"
                 className="input"
+                disabled={this.isDisabled}
                 value={this.state.postContent}
                 onChange={this.handleChange}
                 placeholder="Type your message..."
@@ -61,7 +66,7 @@ class PostComposer extends Component {
             <div className="form-group">
               <button attributeType="submit"
                 className={this.classForButton}
-                disabled={this.state.submitting}>Submit</button>
+                disabled={this.isDisabled}>Submit</button>
             </div>
           </form>
         </div>
