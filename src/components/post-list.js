@@ -19,12 +19,20 @@ class PostList extends Component {
       .orderByChild('createdAt')
       .limitToLast(25)
       .once('value')
-      .then((snapshot) => this.setState({ posts: snapshot.val() }));
+      .then((snapshot) => {
+        let posts = [];
+
+        snapshot.forEach((child) => {
+          posts.unshift([child.key, child.val()]);
+        });
+
+        this.setState({ posts: posts });
+      });
   }
 
   render() {
-    const posts = Object.keys(this.state.posts).reverse().map((k) => {
-      return <li key={k}>{this.state.posts[k].content}</li>
+    const posts = this.state.posts.map((k) => {
+      return <li key={k[0]}>{k[1].content}</li>
     });
 
     return (
