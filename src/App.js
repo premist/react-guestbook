@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.less';
 import fbApp from './firebase';
 
 class App extends Component {
