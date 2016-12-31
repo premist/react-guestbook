@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.less';
-import fbApp from './firebase';
+import './app.less';
+import fbApp from '../firebase';
 
-import Navigation from './components/navigation';
+import Navigation from './navigation';
+import PostList from './post-list';
 
 class App extends Component {
   db = fbApp.database();
@@ -33,13 +34,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation title={this.state.title} user={this.state.user} />
-        <div className="App-header container">
-          <h2>Welcome to React!!!!</h2>
-        </div>
-        <p className="App-intro container">
-          {loggedInStateMessage}<br />
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <PostList />
       </div>
     );
   }
