@@ -60,7 +60,8 @@ class PostComposer extends Component {
 
             <div className="form-group">
               <button attributeType="submit"
-                className={this.classForButton}>Submit</button>
+                className={this.classForButton}
+                disabled={this.state.submitting}>Submit</button>
             </div>
           </form>
         </div>
