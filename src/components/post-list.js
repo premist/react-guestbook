@@ -6,7 +6,7 @@ import Post from './post';
 import './post-list.less';
 
 class PostList extends Component {
-  state = { posts: [] };
+  state = { loaded: false, posts: [] };
   postsRef = null;
 
   constructor(props) {
@@ -33,7 +33,10 @@ class PostList extends Component {
           posts.unshift([child.key, child.val()]);
         });
 
-        this.setState({ posts: posts });
+        this.setState({
+          posts: posts,
+          loaded: true
+        });
       });
   }
 
@@ -46,17 +49,27 @@ class PostList extends Component {
   }
 
   render() {
-    const posts = this.state.posts.map((k) => {
-      return <Post key={k[0]} post={k[1]} />
-    });
+    let content = null;
+
+    if(this.state.loaded) {
+      const posts = this.state.posts.map((k) => {
+        return <Post key={k[0]} post={k[1]} />
+      });
+
+      content = <ul>{posts}</ul>;
+    } else {
+      content = (
+        <div className="loading">
+          <span className="spinner spinning big"><span></span></span>
+        </div>
+      );
+    }
 
     return (
       <section className="post-list">
         <div className="container">
           <div className="panel">
-            <ul>
-              {posts}
-            </ul>
+            { content }
           </div>
         </div>
       </section>
