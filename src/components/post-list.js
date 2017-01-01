@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import fire from '../fire';
 
+import Post from './post';
+
 import './post-list.less';
 
 class PostList extends Component {
@@ -45,14 +47,13 @@ class PostList extends Component {
 
   render() {
     const posts = this.state.posts.map((k) => {
-      return <li className="yoloswag" key={k[0]}>{k[1].content}</li>
+      return <Post key={k[0]} post={k[1]} />
     });
 
     return (
       <section className="post-list">
         <div className="container">
           <div className="panel">
-            <h4>PostList</h4>
             <ul>
               {posts}
             </ul>
