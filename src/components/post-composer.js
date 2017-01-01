@@ -51,24 +51,26 @@ class PostComposer extends Component {
     return(
       <section className="post-composer">
         <div className="container">
-          <form onSubmit={this.submit}>
-            <div className="form-group">
-              <label className="form-label" htmlFor="postContent">Your post</label>
-              <textarea id="postContent"
-                className="input"
-                disabled={this.isDisabled}
-                value={this.state.postContent}
-                onChange={this.handleChange}
-                placeholder="Type your message..."
-                required></textarea>
-            </div>
+          <div className="panel">
+            <h4>Write your post</h4>
+            <form onSubmit={this.submit}>
+              <div className="form-group">
+                <textarea id="postContent"
+                  className="input"
+                  disabled={this.isDisabled}
+                  value={this.state.postContent}
+                  onChange={this.handleChange}
+                  placeholder="Type your message..."
+                  required></textarea>
+              </div>
 
-            <div className="form-group">
-              <button attributeType="submit"
-                className={this.classForButton}
-                disabled={this.isDisabled}>Submit</button>
-            </div>
-          </form>
+              <div className="form-group">
+                <button attributeType="submit"
+                  className={this.classForButton}
+                  disabled={this.isDisabled}>Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     );

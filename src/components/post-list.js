@@ -45,16 +45,18 @@ class PostList extends Component {
 
   render() {
     const posts = this.state.posts.map((k) => {
-      return <li key={k[0]}>{k[1].content}</li>
+      return <li className="yoloswag" key={k[0]}>{k[1].content}</li>
     });
 
     return (
       <section className="post-list">
         <div className="container">
-          <p>PostList</p>
-          <ul>
-            {posts}
-          </ul>
+          <div className="panel">
+            <h4>PostList</h4>
+            <ul>
+              {posts}
+            </ul>
+          </div>
         </div>
       </section>
     );
