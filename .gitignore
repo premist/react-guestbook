@@ -8,6 +8,7 @@ coverage
 
 # firebase-config
 src/firebase-config.js
+.firebaserc
 
 # production
 build
