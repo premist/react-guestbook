@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
+import firebase from "firebase";
+import fire from '../fire';
+
 import './navigation.less';
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  login() {
+    let provider = new firebase.auth.TwitterAuthProvider();
+    fire.auth().signInWithPopup(provider);
+  }
+
+  logout() {
+    fire.auth().signOut();
+  }
+
   render() {
-    let greeting = null;
-    if(this.props.user === undefined) {
-      greeting = <span>Not logged in</span>;
+    let loginState = null;
+    if (this.props.user === undefined) {
+      loginState = (
+        <p className="login-state">
+          Not logged in. <a onClick={this.login}>Log in</a>
+        </p>
+      );
     } else {
-      greeting = <span>Logged in</span>;
+      loginState = (
+        <p className="login-state">
+          Logged in. <a onClick={this.logout}>Log out</a>
+        </p>
+      );
     }
 
     return (
@@ -18,9 +45,7 @@ class Navigation extends Component {
               <a className="title" href="#">{ this.props.title }</a>
             </div>
 
-            <div className="col-5">
-              <p className="greeting">{ greeting }</p>
-            </div>
+            <div className="col-5">{ loginState }</div>
           </div>
         </div>
       </header>
