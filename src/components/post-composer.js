@@ -13,6 +13,7 @@ class PostComposer extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -20,8 +21,16 @@ class PostComposer extends Component {
     this.setState({ postContent: e.target.value });
   }
 
+  handleKeyDown(e) {
+    if(e.keyCode === 13 && e.metaKey) {
+      this.submit(null);
+    }
+  }
+
   submit(e) {
-    e.preventDefault();
+    if(e !== null) {
+      e.preventDefault();
+    }
 
     this.setState({ submitting: true });
 
@@ -35,16 +44,21 @@ class PostComposer extends Component {
       console.warn(e);
     }).then(() => {
       this.setState({ submitting: false });
+      this.textarea.focus();
     });
   };
 
-  get classForButton() {
+  get buttonClasses() {
     let defaultClasses = "btn btn-spinner red";
     return this.state.submitting ? `${defaultClasses} loading` : defaultClasses;
   }
 
   get isDisabled() {
     return this.state.submitting || this.props.user === undefined
+  }
+
+  get submitDisabled() {
+    return this.isDisabled || this.state.postContent === "";
   }
 
   render() {
@@ -57,8 +71,10 @@ class PostComposer extends Component {
               <div className="form-group">
                 <textarea id="postContent"
                   className="input"
+                  ref={(t) => { this.textarea = t; }}
                   disabled={this.isDisabled}
                   value={this.state.postContent}
+                  onKeyDown={this.handleKeyDown}
                   onChange={this.handleChange}
                   placeholder="Type your message..."
                   required></textarea>
@@ -66,8 +82,8 @@ class PostComposer extends Component {
 
               <div className="form-group">
                 <button attributeType="submit"
-                  className={this.classForButton}
-                  disabled={this.isDisabled}>Submit</button>
+                  className={this.buttonClasses}
+                  disabled={this.submitDisabled}>Submit</button>
               </div>
             </form>
           </div>

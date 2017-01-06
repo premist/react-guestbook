@@ -19,9 +19,19 @@ class App extends Component {
 
     let auth = fire.auth();
 
+    this.setUser = this.setUser.bind(this);
+
     auth.onAuthStateChanged((user) => {
-      if(user) { this.setState({user: user}); }
+      if(user) { this.setUser(user); }
       else { this.setState({user: undefined}); }
+    });
+  }
+
+  setUser(user) {
+    this.setState({user: user});
+    fire.database().ref(`users/${user.uid}`).set({
+      avatar: user.photoURL.replace("http", "https"),
+      displayName: user.displayName
     });
   }
 

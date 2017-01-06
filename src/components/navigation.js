@@ -26,13 +26,16 @@ class Navigation extends Component {
     if (this.props.user === undefined) {
       loginState = (
         <p className="login-state">
-          Not logged in. <a onClick={this.login}>Log in</a>
+          <span>Not logged in</span>
+          <a href="#" onClick={this.login}>Login</a>
         </p>
       );
     } else {
       loginState = (
         <p className="login-state">
-          Logged in. <a onClick={this.logout}>Log out</a>
+          <img className="avatar" alt="avatar" src={this.props.user.photoURL} />
+          <span>{ this.props.user.displayName }</span>
+          <a href="#" onClick={this.logout}>Logout</a>
         </p>
       );
     }
