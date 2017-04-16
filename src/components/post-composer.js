@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../fire';
+import firebase from 'firebase';
 
 import './post-composer.less';
 
@@ -36,7 +37,7 @@ class PostComposer extends Component {
 
     fire.database().ref('posts').push({
       content: this.state.postContent,
-      createdAt: Date.now(),
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       createdBy: this.props.user.uid
     }).then((ref) => {
       this.setState({ postContent: "" });
