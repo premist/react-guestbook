@@ -21,6 +21,10 @@ class Navigation extends Component {
     fire.auth().signOut();
   }
 
+  get avatar() {
+    return this.props.user.photoURL.replace("http", "https");
+  }
+
   render() {
     let loginState = null;
     if (this.props.user === undefined) {
@@ -33,7 +37,7 @@ class Navigation extends Component {
     } else {
       loginState = (
         <p className="login-state">
-          <img className="avatar" alt="avatar" src={this.props.user.photoURL} />
+          <img className="avatar" alt="avatar" src={ this.avatar } />
           <span>{ this.props.user.displayName }</span>
           <a href="#" onClick={this.logout}>Logout</a>
         </p>
