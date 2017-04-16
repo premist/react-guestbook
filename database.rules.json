@@ -1,11 +1,41 @@
 {
   "rules": {
-    ".read": true,
-    ".write": "auth != null",
-    "users": {
-      "$uid": {
-        ".write": "$uid === auth.uid"
+    "posts": {
+      ".read": true,
+      "$message_id": {
+        ".write": "auth != null",
+
+        "content": {
+          ".validate": "!data.exists() && newData.isString() && newData.val().length > 0 && newData.val().length < 1000"
+        },
+
+        "createdBy": {
+          ".validate": "newData.val() === auth.uid"
+        },
+
+        "createdAt": {
+          ".validate": "newData.val() <= now"
+        },
+
+        "$other": { ".validate": false }
       }
-    }
+    },
+    "users": {
+      ".read": true,
+      "$uid": {
+        ".write": "$uid === auth.uid",
+
+        "displayName": {
+          ".validate": "newData.val() === auth.token.name"
+        },
+
+        "avatar": {
+          ".validate": "newData.val().replace('https', 'http') === auth.token.picture"
+        },
+
+        "$other": { ".validate": false }
+      }
+    },
+    "$other": { ".validate": false }
   }
 }
